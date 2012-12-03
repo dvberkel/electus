@@ -12,14 +12,14 @@ module.exports = function(grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
     },
     qunit: {
       files: ['test/**/*.html']
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', 'lib/namespace.js'],
+        src: ['<banner:meta.banner>', 'src/namespace.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
