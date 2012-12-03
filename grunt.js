@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     lint: {
-      files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
+      files: ['grunt.js', 'src/**/*.js', 'spec/**/*.js']
     },
     qunit: {
       files: ['test/**/*.html']
@@ -49,7 +49,13 @@ module.exports = function(grunt) {
       },
       globals: {
         jQuery: true,
-	module: false
+	module: true,
+	_: false,
+        Backbone: false,
+        Electus: true,
+        describe: false,
+        it: false,
+        expect: false
       }
     },
     uglify: {}
