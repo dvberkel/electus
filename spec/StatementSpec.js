@@ -43,5 +43,17 @@ describe("a Statement", function(){
 
 	    expect($("div.statement")).toExist();
 	});
+
+	it("should have a container with a agree button", function(){
+	    new Electus.StatementView({ model : statement, el : $("#viewport") });
+
+	    expect($("div.statement button.agree")).toExist();
+	});
+
+	it("should have a container with a disagree button", function(){
+	    new Electus.StatementView({ model : statement, el : $("#viewport") });
+
+	    expect($("div.statement button.disagree")).toExist();
+	});
     });
 });
