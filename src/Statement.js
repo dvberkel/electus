@@ -29,23 +29,10 @@
 
         render : function(){
             var container = $("<div class='statement'></div>");
-            new SentenceView({model : this.model, el : container });
+            new Electus.SentenceView({model : new Electus.Sentence({text : this.model.get("sentence")}), el : container });
             new AgreeButton({model : this.model, el : container });
             new DisagreeButton({model : this.model, el : container });
             container.appendTo(this.$el);
-        }
-    });
-
-    var SentenceView = Backbone.View.extend({
-        template : _.template("<h1 class='sentence'><%= sentence %></h1>"),
-
-        initialize : function(){
-            this.render();
-        },
-
-        render : function(){
-            var span = $(this.template(this.model.toJSON()));
-            span.appendTo(this.$el);
         }
     });
 
