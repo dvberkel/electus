@@ -27,6 +27,17 @@ describe("a Statement", function(){
         expect(statement.get("agreement")).toBeFalsy();
     });
 
+    it("should allow agreement callbacks", function(){
+        var called = false;
+        var statement = new Electus.Statement({
+            "after-agreement": [function(){ called = true; }]
+        });
+
+        statement.agree();
+
+        expect(called).toBeTruthy();
+    });
+
     describe("View", function(){
         var statement;
 

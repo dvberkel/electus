@@ -2,6 +2,17 @@
     var Statement = Backbone.Model.extend({
         defaults : { "sentence" : "You should come prepared" },
 
+        initialize : function(){
+            if (! this.has("after-agreement")) {
+                this.set("after-agreement", []);
+            }
+            this.on("change:agreement", function(){
+                _.each(this.get("after-agreement"), function(callback){
+                    callback.call(this);
+                });
+            }, this);
+        },
+
         agree : function(){
             this.set("agreement", true);
         },
