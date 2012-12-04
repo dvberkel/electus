@@ -18,9 +18,23 @@
 
 	render : function(){
 	    var container = $("<div class='statement'></div>");
+	    new SentenceView({model : this.model, el : container });
 	    new AgreeButton({model : this.model, el : container });
 	    new DisagreeButton({model : this.model, el : container });
 	    container.appendTo(this.$el);
+	}
+    });
+
+    var SentenceView = Backbone.View.extend({
+	template : _.template("<span class='sentence'><%= sentence %></span>"),
+
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var span = $(this.template(this.model.toJSON()));
+	    span.appendTo(this.$el);
 	}
     });
 
@@ -30,8 +44,12 @@
 	},
 
 	render : function(){
+	    var self = this;
 	    var button = $("<button class='agree'>agree</button>");
-	    button.appendTo(this.$el);
+	    button.click(function(){
+		self.model.agree();
+	    });
+	    button.appendTo(self.$el);
 	}
     });
 
@@ -41,8 +59,12 @@
 	},
 
 	render : function(){
+	    var self = this;
 	    var button = $("<button class='disagree'>disagree</button>");
-	    button.appendTo(this.$el);
+	    button.click(function(){
+		self.model.disagree();
+	    });
+	    button.appendTo(self.$el);
 	}
     });
 

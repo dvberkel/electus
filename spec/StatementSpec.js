@@ -44,16 +44,38 @@ describe("a Statement", function(){
 	    expect($("div.statement")).toExist();
 	});
 
-	it("should have a container with a agree button", function(){
+	it("the container should have a span button", function(){
+	    new Electus.StatementView({ model : statement, el : $("#viewport") });
+
+	    expect($("div.statement span.sentence")).toExist();
+	});
+
+	it("the container should have a agree button", function(){
 	    new Electus.StatementView({ model : statement, el : $("#viewport") });
 
 	    expect($("div.statement button.agree")).toExist();
 	});
 
-	it("should have a container with a disagree button", function(){
+	it("the container should have a disagree button", function(){
 	    new Electus.StatementView({ model : statement, el : $("#viewport") });
 
 	    expect($("div.statement button.disagree")).toExist();
+	});
+
+	it("when the agree button is clicked you agree with the statement", function(){
+	    new Electus.StatementView({ model : statement, el : $("#viewport") });
+	    
+	    $("button.agree").click();
+
+	    expect(statement.get("agreement")).toBeTruthy();
+	});
+
+	it("when the disagree button is clicked you disagree with the statement", function(){
+	    new Electus.StatementView({ model : statement, el : $("#viewport") });
+	    
+	    $("button.disagree").click();
+
+	    expect(statement.get("agreement")).toBe(false);
 	});
     });
 });
