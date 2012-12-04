@@ -26,7 +26,7 @@
     });
 
     var SentenceView = Backbone.View.extend({
-        template : _.template("<h1><%= sentence %></h1>"),
+        template : _.template("<h1 class='sentence'><%= sentence %></h1>"),
 
         initialize : function(){
             this.render();
@@ -57,7 +57,7 @@
 
         button : function(){
             if (this._button === undefined) {
-                this._button = $("<button class='btn btn-large btn-success'>agree</button>");
+                this._button = $("<button class='agree btn btn-large btn-success'>agree</button>");
             }
            return this._button;
         }
@@ -82,7 +82,7 @@
 
         button : function(){
             if (this._button === undefined) {
-                this._button = $("<button class='btn btn-large btn-danger'>disagree</button>");
+                this._button = $("<button class='disagree btn btn-large btn-danger'>disagree</button>");
             }
            return this._button;
         }

@@ -44,10 +44,10 @@ describe("a Statement", function(){
             expect($("div.statement")).toExist();
         });
 
-        it("the container should have a span button", function(){
+        it("the container should have a header", function(){
             new Electus.StatementView({ model : statement, el : $("#viewport") });
 
-            expect($("div.statement span.sentence")).toExist();
+            expect($("div.statement h1.sentence")).toExist();
         });
 
         it("the container should have a agree button", function(){
