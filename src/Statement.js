@@ -26,7 +26,7 @@
     });
 
     var SentenceView = Backbone.View.extend({
-        template : _.template("<span class='sentence'><%= sentence %></span>"),
+        template : _.template("<h1><%= sentence %></h1>"),
 
         initialize : function(){
             this.render();
@@ -45,7 +45,7 @@
 
         render : function(){
             var self = this;
-            var button = $("<button class='agree'>agree</button>");
+            var button = $("<button class='btn btn-large btn-success'>agree</button>");
             button.click(function(){
                 self.model.agree();
             });
@@ -60,7 +60,7 @@
 
         render : function(){
             var self = this;
-            var button = $("<button class='disagree'>disagree</button>");
+            var button = $("<button class='btn btn-large btn-danger'>disagree</button>");
             button.click(function(){
                 self.model.disagree();
             });
