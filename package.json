@@ -28,6 +28,7 @@
     "test": "./node_modules/.bin/grunt test"
   },
   "dependencies": {
+    "socket.io": "0.9.11"
   },
   "devDependencies": {
     "grunt": "~0.3.17"
