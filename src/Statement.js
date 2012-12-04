@@ -40,31 +40,51 @@
 
     var AgreeButton = Backbone.View.extend({
         initialize : function(){
+            this.model.on("change:agreement", function(){
+		$("button.agree, button.disagree").hide();
+            }, this);
             this.render();
         },
 
         render : function(){
             var self = this;
-            var button = $("<button class='agree'>agree</button>");
+            var button = this.button();
             button.click(function(){
                 self.model.agree();
             });
             button.appendTo(self.$el);
+        },
+
+        button : function(){
+            if (this._button === undefined) {
+                this._button = $("<button class='agree'>agree</button>");
+            }
+           return this._button;
         }
     });
 
     var DisagreeButton = Backbone.View.extend({
         initialize : function(){
+            this.model.on("change:agreement", function(){
+		$("button.agree, button.disagree").hide();
+            }, this);
             this.render();
         },
 
         render : function(){
             var self = this;
-            var button = $("<button class='disagree'>disagree</button>");
+            var button = this.button();
             button.click(function(){
                 self.model.disagree();
             });
             button.appendTo(self.$el);
+        },
+
+        button : function(){
+            if (this._button === undefined) {
+                this._button = $("<button class='disagree'>agree</button>");
+            }
+           return this._button;
         }
     });
 

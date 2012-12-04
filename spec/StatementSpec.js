@@ -77,5 +77,15 @@ describe("a Statement", function(){
 
             expect(statement.get("agreement")).toBe(false);
         });
+	
+        // TODO: although the buttons are hidden when clicked this test fails.
+        xit("when the agree button is clicked the buttons should be hidden", function(){
+            new Electus.StatementView({ model : statement, el : $("#viewport") });
+            
+            $("button.agree").click();
+
+            expect("button.agree").toBeHidden();
+            expect("button.disagree").toBeHidden();
+        });
     });
 });

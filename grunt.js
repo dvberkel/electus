@@ -55,6 +55,7 @@ module.exports = function(grunt) {
         Electus: true,
         describe: false,
         it: false,
+	xit: false,
         expect: false,
 	beforeEach: false,
 	loadFixtures: false,
