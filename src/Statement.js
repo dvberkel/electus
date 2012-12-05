@@ -1,8 +1,9 @@
-(function($, _, Backbone, Electus){
+(function($, _, Backbone, Electus, undefined){
     var Statement = Backbone.Model.extend({
-        defaults : { "sentence" : "You should come prepared" },
-
         initialize : function(){
+            if (! this.has("sentence")) {
+                this.set("sentence", new Electus.Sentence({ text : "You should come prepared" }));
+            }
             if (! this.has("after-agreement")) {
                 this.set("after-agreement", []);
             }
@@ -11,6 +12,13 @@
                     callback.call(this);
                 });
             }, this);
+            this.get("sentence").on("change:text", function(){
+                this.refresh();
+            }, this);
+        },
+
+        refresh: function(){
+            this.set("agreement", undefined);
         },
 
         agree : function(){
@@ -19,6 +27,10 @@
 
         disagree : function(){
             this.set("agreement", false);
+        },
+
+        setSentence : function(text){
+            this.get("sentence").set("text", text);
         }
     });
 
@@ -29,7 +41,7 @@
 
         render : function(){
             var container = $("<div class='statement'></div>");
-            new Electus.SentenceView({model : new Electus.Sentence({text : this.model.get("sentence")}), el : container });
+            new Electus.SentenceView({model : this.model.get("sentence"), el : container });
             new AgreeButton({model : this.model, el : container });
             new DisagreeButton({model : this.model, el : container });
             container.appendTo(this.$el);
@@ -39,7 +51,11 @@
     var AgreeButton = Backbone.View.extend({
         initialize : function(){
             this.model.on("change:agreement", function(){
-		$("button.agree, button.disagree").hide();
+                if (this.model.get("agreement") === undefined) {
+                    $("button.agree, button.disagree").show();
+                } else {
+                    $("button.agree, button.disagree").hide();
+                }
             }, this);
             this.render();
         },
@@ -64,7 +80,11 @@
     var DisagreeButton = Backbone.View.extend({
         initialize : function(){
             this.model.on("change:agreement", function(){
-		$("button.agree, button.disagree").hide();
+                if (this.model.get("agreement") === undefined) {
+                    $("button.agree, button.disagree").show();
+                } else {
+                    $("button.agree, button.disagree").hide();
+                }
             }, this);
             this.render();
         },

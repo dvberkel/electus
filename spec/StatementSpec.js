@@ -2,7 +2,7 @@ describe("a Statement", function(){
     it("should have a default sentence", function(){
         var statement = new Electus.Statement();
 
-        expect(statement.get("sentence")).toBe("You should come prepared");
+        expect(statement.get("sentence").get("text")).toBe("You should come prepared");
     });
 
     it("should not have an default agreement", function(){
@@ -36,6 +36,16 @@ describe("a Statement", function(){
         statement.agree();
 
         expect(called).toBeTruthy();
+    });
+
+
+    it("when the sentence is set the statement is refreshed", function(){
+        var statement = new Electus.Statement();
+        statement.agree();
+
+        statement.setSentence("It is better to be sorry then to be safe");
+
+        expect(statement.get("agreement")).toBe(undefined);
     });
 
     describe("View", function(){
@@ -88,7 +98,7 @@ describe("a Statement", function(){
 
             expect(statement.get("agreement")).toBe(false);
         });
-	
+
         // TODO: although the buttons are hidden when clicked this test fails.
         xit("when the agree button is clicked the buttons should be hidden", function(){
             new Electus.StatementView({ model : statement, el : $("#viewport") });
@@ -97,6 +107,16 @@ describe("a Statement", function(){
 
             expect("button.agree").toBeHidden();
             expect("button.disagree").toBeHidden();
+        });
+
+        it("when the sentence changes buttons should be visible hidden", function(){
+            new Electus.StatementView({ model : statement, el : $("#viewport") });
+            $("button.agree").click();
+
+            statement.setSentence("it is better to ask forgiveness then permission");
+
+            expect("button.agree").not.toBeHidden();
+            expect("button.disagree").not.toBeHidden();
         });
     });
 });

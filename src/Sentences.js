@@ -19,15 +19,22 @@
     });
 
     var SentenceView = Backbone.View.extend({
-        template : _.template("<h1 class='sentence'><%= text %></h1>"),
-
         initialize : function(){
+            this.model.on("change:text", this.render, this);
             this.render();
         },
 
         render : function(){
-            var span = $(this.template(this.model.toJSON()));
-            span.appendTo(this.$el);
+            var span = this.span();
+            span.text(this.model.get("text"));
+        },
+
+        span : function(){
+            if (! this._span) {
+                this._span = $("<h1 class='sentence'>?</h1>");
+                this._span.appendTo(this.$el);
+            }
+            return this._span;
         }
     });
 
