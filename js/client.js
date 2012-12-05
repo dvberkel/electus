@@ -1,8 +1,7 @@
 (function($, Electus){
     var socket = io.connect('http://localhost:3435');
-    socket.on('news', function (data) {
-	console.log(data);
-	socket.emit('my other event', { my: 'data' });
+    socket.on('sentence', function (data) {
+	statement.setSentence(data.text);
     });
 
     var statement = new Electus.Statement({
