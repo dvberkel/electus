@@ -33,4 +33,38 @@ describe("a Sentences", function(){
             expect($("h1.sentence")).toExist();
         });
     });
+
+    describe("SentencesView", function() {
+      var sentences;
+    
+      beforeEach(function() {
+        loadFixtures("viewport.html");
+      });
+
+      beforeEach(function() {
+        sentences = new Electus.Sentences();
+        sentences.addAll("Sentence One;Sentence Two");
+      });
+
+      it("should create a container", function() {
+        new Electus.SentencesView({model: sentences, el : $("#viewport") });
+        expect($("table.sentences")).toExist();
+      });
+      
+      it("should create sentences in the view", function() {
+        new Electus.SentencesView({model: sentences, el : $("#viewport") });
+        expect($("table.sentences > tbody > tr")).toExist();
+      });
+      
+      it("should create sentences with buttons in the view", function() {
+        new Electus.SentencesView({model: sentences, el : $("#viewport") });
+        expect($("table.sentences > tbody > tr > td > button")).toExist();
+      });
+      
+      it("should create an upload button", function() {
+        new Electus.SentencesView({model: sentences, el : $("#viewport") });
+        expect($("textarea")).toExist();
+        expect($("button.upload")).toExist();
+      });
+    });
 });
