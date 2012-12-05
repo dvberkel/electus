@@ -74,5 +74,13 @@ describe("a Sentences", function(){
         expect(view.model.length).toBe(2);
       });
 
+      it("should, after send, call callback", function() {
+        var view = new Electus.SentencesView({model: sentences, el : $("#viewport"), "after-send" : [function() {
+          expect(2).toBe(2);
+        }] });
+        $("textarea").val("Sentence1");
+        $("button.upload").click();
+        $("button.send").click();
+      });
     });
 });

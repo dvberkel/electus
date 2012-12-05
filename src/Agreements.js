@@ -2,50 +2,20 @@
     var Sentence = Backbone.Model.extend({
 	defaults: {
           text : "Empty sentence"
-        },
-
-        initialize: function() {
-          if (!this.has("after-send")) {
-            this.set("after-send", []);
-          }
-        },
-
-        send: function() {
-          var self = this;
-          _.each(this.get("after-send"), function(callback) {
-            callback.call(self);
-          });
         }
     });
 	
     var Sentences = Backbone.Collection.extend({
 	model: Sentence,
-        initialize: function (options) {
-          options = options || {};
-          if (!options["after-send"]) {
-            this["after-send"] = [];
-          } else {
-            this["after-send"] = options["after-send"];
-          }
+        initialize: function (models, options) {
         },
-
 	addAll: function(sentences) {
           this.reset();
           var splitSentences = sentences.split(";");
-          var self = this;
-          _.each(splitSentences, function(text) {
-            var sentence = new Sentence({text: text, "after-send" : [function() { 
-              self.send(this);
-            }]});
-            this.add(sentence);
-          }, this);
-        },
-
-       send: function(sentence) {
-         _.each(this["after-send"], function(callback) {
-            callback.call(sentence);
-          });
-       }
+          for (var i=0; i < splitSentences.length; i++) {
+            this.add(new Sentence({text: splitSentences[i]}));
+          }
+        }
     });
 
     var SentenceView = Backbone.View.extend({
@@ -110,7 +80,7 @@
             var self = this;
             var button = this.button();
             button.click(function(){
-                self.model.send();
+                console.log("implement send over here!" + self.model.get("text"));
                 button.hide();
             });
             var td = $('<td></td>');
