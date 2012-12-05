@@ -1,20 +1,20 @@
 describe("a Sentences", function(){
     it("should have an empty list of sentences", function(){
         var sentences = new Electus.Sentences();
-        expect(sentences.models.length).toBe(0);
+        expect(sentences.length).toBe(0);
     });
 
     it("should be able to add a sentence ", function(){
         var sentences = new Electus.Sentences();
 	sentences.add(new Electus.Sentence({text: "You should become prepared!"}));
-        expect(sentences.models.length).toBe(1);
-        expect(sentences.models[0].get("text")).toBe("You should become prepared!");
+        expect(sentences.length).toBe(1);
+        expect(sentences.at(0).get("text")).toBe("You should become prepared!");
     });
 
     it("should be able to add multiple sentences", function(){
         var sentences = new Electus.Sentences();
         sentences.addAll("Sentence one;Sentence two");
-        expect(sentences.models.length).toBe(2);
+        expect(sentences.length).toBe(2);
     });
 
     describe("SentenceView", function() {
@@ -66,5 +66,13 @@ describe("a Sentences", function(){
         expect($("textarea")).toExist();
         expect($("button.upload")).toExist();
       });
+
+      it("should, after upload, contain new sentences ", function() {
+        var view = new Electus.SentencesView({model: sentences, el : $("#viewport") });
+        $("textarea").val("Sentence1;Sentence2");
+        $("button.upload").click();
+        expect(view.model.length).toBe(2);
+      });
+
     });
 });

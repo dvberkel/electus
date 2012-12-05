@@ -8,9 +8,9 @@
     var Sentences = Backbone.Collection.extend({
 	model: Sentence,
         initialize: function (models, options) {
-          // todo
         },
 	addAll: function(sentences) {
+          this.reset();
           var splitSentences = sentences.split(";");
           for (var i=0; i < splitSentences.length; i++) {
             this.add(new Sentence({text: splitSentences[i]}));
@@ -41,9 +41,7 @@
     var SentencesView = Backbone.View.extend({
 
         initialize : function() {
-          var that = this;
-          this._sentenceViews = [];
- 
+          this.model.on("add", this.render, this);
           this.render();
         },
  
@@ -83,7 +81,7 @@
             var button = this.button();
             button.click(function(){
                 console.log("implement send over here!" + self.model.get("text"));
-                this.hide();
+                button.hide();
             });
             var td = $('<td></td>');
             button.appendTo(td);
@@ -111,7 +109,6 @@
             var button = $("<button class='upload btn btn-success'>upload</button>");
             button.click(function() {
              self.model.addAll(textarea.val());
-// todo: render the view?
             });
             button.appendTo(this.$el);
         }
