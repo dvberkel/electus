@@ -144,9 +144,6 @@
         }
     });
 
-
-
-
     Electus.Sentence = Sentence;
     Electus.Sentences = Sentences;
     Electus.SentenceView = SentenceView;
