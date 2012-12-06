@@ -1,4 +1,4 @@
-{
+ {
   "name": "electus",
   "description": "Agree/disagree with a statement in realtime",
   "version": "0.0.0",
@@ -29,7 +29,7 @@
     "test": "./node_modules/.bin/grunt test"
   },
   "dependencies": {
-    "socket.io": "0.9.11"
+    "socket.io": "0.8.7"
   },
   "devDependencies": {
     "grunt": "~0.3.17",
