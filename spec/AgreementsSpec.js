@@ -79,4 +79,54 @@ describe("Agreements", function(){
         expect(agreement.disagreements()).toBe(1);
 	expect(agreement.votes()).toBe(3);
     });
+
+
+    describe("AgreementsView", function(){
+	var agreements;
+	
+	beforeEach(function(){
+	    loadFixtures("viewport.html");
+	});
+
+	beforeEach(function(){
+	    agreements = new Electus.Agreements();
+	    agreements.addAgreements("You should come prepared", false);
+	});
+	
+	it("should create a container", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements")).toExist();
+	});
+
+	it("should have a table row for each model", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements tr.agreement")).toExist();
+	});
+
+	it("each row should have an upvote cell", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements tr.agreement td.up")).toExist();
+	});
+
+	it("each row should have an upvote sentence cell", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements tr.agreement td.sentence")).toExist();
+	});
+
+	it("each row should have an votes cell", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements tr.agreement td.votes")).toExist();
+	});
+
+	it("each row should have an downvote cell", function(){
+	    new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+	    
+	    expect($("table.agreements tr.agreement td.down")).toExist();
+	});
+    });
 });

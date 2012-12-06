@@ -46,6 +46,87 @@
         }
     });
 
+    var AgreementsView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var table = $("<table class='agreements table table-striped table-bordered table-condensed'></table>");
+	    this.model.each(function(agreement){
+		new AgreementView({ model : agreement, el : table});
+	    });
+	    
+	    table.appendTo(this.$el);
+	}
+
+	
+    });
+
+    var AgreementView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var row = $("<tr class='agreement'></tr>");
+	    new UpView({ model : this.model, el : row });
+	    new SentenceView({ model : this.model, el : row });
+	    new VotesView({ model : this.model, el : row });
+	    new DownView({ model : this.model, el : row });
+	    row.appendTo(this.$el);
+	}
+    });
+
+    var UpView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var td = $("<td class='up'></td>");
+	    td.append(this.model.agreements());
+	    td.appendTo(this.$el);
+	}
+    });
+
+    var SentenceView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var td = $("<td class='sentence'></td>");
+	    td.append(this.model.get("sentence").get("text"));
+	    td.appendTo(this.$el);
+	}
+    });
+
+    var VotesView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var td = $("<td class='votes'></td>");
+	    td.append(this.model.votes());
+	    td.appendTo(this.$el);
+	}
+    });
+
+    var DownView = Backbone.View.extend({
+	initialize : function(){
+	    this.render();
+	},
+
+	render : function(){
+	    var td = $("<td class='down'></td>");
+	    td.append(this.model.disagreements());
+	    td.appendTo(this.$el);
+	}
+    });
+
     Electus.Agreement = Agreement;
     Electus.Agreements = Agreements;
+    Electus.AgreementsView = AgreementsView;
 })(jQuery, _, Backbone, Electus);
