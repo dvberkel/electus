@@ -1,7 +1,7 @@
 {
  "name": "electus",
  "description": "Agree/disagree with a statement in realtime",
- "version": "0.0.0",
+ "version": "0.0.0-1",
  "homepage": "https://github.com/dvberkel/electus",
  "author": {
   "name": "Daan van Berkel",
@@ -22,7 +22,7 @@
   }
  ],
  "engines": {
-  "node": ">=0.9.3",
+  "node": ">=0.8.x",
   "npm": ">=1.1.64"
  },
  "scripts": {
