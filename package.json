@@ -1,7 +1,7 @@
 {
  "name": "electus",
  "description": "Agree/disagree with a statement in realtime",
- "version": "0.0.0-1",
+ "version": "0.0.0-2",
  "homepage": "https://github.com/dvberkel/electus",
  "author": {
   "name": "Daan van Berkel",

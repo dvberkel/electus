@@ -1,4 +1,4 @@
-var io = require("socket.io").listen(process.env.PORT || 3435);
+var io = require("socket.io").listen(80);
 
 io.sockets.on('connection', function (socket) {
     socket.on('sentence', function(data){
