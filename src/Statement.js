@@ -18,7 +18,7 @@
         },
 
         refresh: function(){
-            this.set("agreement", undefined);
+            this.set({"agreement": undefined}, {silent:true});
         },
 
         agree : function(){

@@ -118,5 +118,19 @@ describe("a Statement", function(){
             expect("button.agree").not.toBeHidden();
             expect("button.disagree").not.toBeHidden();
         });
+        
+        it("when the sentence changes after agreement no event should be fired", function(){
+            new Electus.StatementView({ model : statement, el : $("#viewport") });
+            // agree with this sentence
+            $("button.agree").click();
+
+            var callback = {
+               method: function() {return;}
+            };
+            spyOn(callback, "method");
+            statement.set("after-agreement", [callback.method]);
+            statement.setSentence("it is better to ask forgiveness then permission");
+            expect(callback.method).not.toHaveBeenCalled();
+        });
     });
 });
