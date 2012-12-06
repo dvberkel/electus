@@ -41,10 +41,42 @@ describe("Agreement", function(){
 });
 
 describe("Agreements", function(){
-    it("should possible to add a sentence agreement",function(){
+    it("should start out without any agreements",function(){
         var agreements = new Electus.Agreements();
   
         expect(agreements.length).toBe(0);
     });
+    
+    it("should be possible to add an agreement", function() {
+        var agreements = new Electus.Agreements();
 
+        agreements.addAgreements("You should come prepared", true);
+
+        expect(agreements.length).toBe(1);
+    });
+    
+    it("should be possible to add an disagreement", function(){
+        var agreements = new Electus.Agreements();
+
+        agreements.addAgreements("You should come prepared", false);
+
+        expect(agreements.length).toBe(1);
+    });
+    
+    it("should votes should be tallied", function(){
+        var agreements = new Electus.Agreements();
+
+        agreements.addAgreements("You should come prepared", true);
+        agreements.addAgreements("It is better to ask forgiveness then permission", false);
+        agreements.addAgreements("You should come prepared", false);
+        agreements.addAgreements("You should come prepared", true);
+        agreements.addAgreements("It is better to ask forgiveness then permission", false);
+        
+	expect(agreements.length).toBe(2);
+        var agreement = agreements.agreementWithText("You should come prepared");
+        expect(agreement).toBeDefined();
+        expect(agreement.agreements()).toBe(2);
+        expect(agreement.disagreements()).toBe(1);
+	expect(agreement.votes()).toBe(3);
+    });
 });

@@ -23,7 +23,28 @@
         }
     });
     
-    var Agreements = Backbone.Collection.extend({});
+    var Agreements = Backbone.Collection.extend({
+        model : Agreement,
+
+        addAgreements : function(text, agreement){
+            var target = this.agreementWithText(text);
+            if (target === undefined) {
+                target = new Agreement({ "sentence" : new Electus.Sentence({ text : text })});
+                this.add(target);
+            }
+            target.agreement(agreement);
+        },
+
+        agreementWithText : function(text){
+            var target;
+            this.each(function(candidate){
+                if (candidate.get("sentence").get("text") === text) {
+                    target = candidate;
+                }
+            });
+            return target;
+        }
+    });
 
     Electus.Agreement = Agreement;
     Electus.Agreements = Agreements;
