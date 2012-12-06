@@ -55,6 +55,7 @@
         render : function(){
             this.$el.empty();
             var table = $("<table class='agreements table table-striped table-bordered table-condensed'></table>");
+            table.append($("<tr></tr>").append($("<td><i class='icon-thumbs-up'></i></td><td>Statement</td><td>Votes</td><td><i class='icon-thumbs-down'></i></td>")));
             this.model.each(function(agreement){
                 new AgreementView({ model : agreement, el : table});
             });
