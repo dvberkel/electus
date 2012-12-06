@@ -1,4 +1,4 @@
-/*! electus - v0.0.0 - 2012-12-05
+/*! electus - v0.0.0 - 2012-12-06
 * https://github.com/dvberkel/electus
 * Copyright (c) 2012 Daan van Berkel; Licensed MIT */
 
