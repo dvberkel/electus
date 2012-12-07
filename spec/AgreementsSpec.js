@@ -78,6 +78,8 @@ describe("Agreements", function(){
         expect(agreement.agreements()).toBe(2);
         expect(agreement.disagreements()).toBe(1);
         expect(agreement.votes()).toBe(3);
+        var agreementTwo = agreements.agreementWithText("It is better to ask forgiveness then permission");
+        expect(agreementTwo.votes()).toBe(2);
     });
 
 
@@ -127,6 +129,16 @@ describe("Agreements", function(){
             new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
             
             expect($("table.agreements tr.agreement td.down")).toExist();
+        });
+
+        it("the votes cell should be updated after vote", function(){
+            new Electus.AgreementsView({ model : agreements, el : $("#viewport") });
+            agreements.addAgreements("You should come prepared", true); 
+            expect($("table.agreements tr.agreement td.votes").html()).toBe("2");
+            agreements.addAgreements("Second sentence", true); 
+            expect($("table.agreements tr.agreement:eq(1) td.votes").html()).toBe("1");
+            agreements.addAgreements("Second sentence", true); 
+            expect($("table.agreements tr.agreement:eq(1) td.votes").html()).toBe("2");
         });
     });
 });
