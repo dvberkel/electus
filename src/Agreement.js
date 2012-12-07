@@ -11,9 +11,10 @@
         },
 
         agreement : function(agreement){
-            if (agreement) {
+            if (agreement === true) {
                 this.set("_agreements", this.get("_agreements") + 1);
-            } else {
+            }
+            if (agreement === false) {
                 this.set("_disagreements", this.get("_disagreements") + 1);
             }
         },
