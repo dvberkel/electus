@@ -31,7 +31,13 @@ It can be used in the following manner
 
 This will start a [socket.io][4] server listening on port `3435`.
 
+License
+-------
+
+Electus is licensed under the [MIT License][5].
+
 [1]: https://github.com/joyent/node/wiki/modules "Node.js documentation on modules"
 [2]: http://gruntjs.com/ "grunt.js homepage"
 [3]: https://github.com/remy/nodemon "Nodemon on GitHub"
 [4]: http://socket.io/ "Socket.io homepage"
+[5]: https://github.com/dvberkel/electus/blob/master/LICENSE-MIT
