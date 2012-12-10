@@ -31,6 +31,16 @@ It can be used in the following manner
 
 This will start a [socket.io][4] server listening on port `3435`.
 
+Deployement
+-----------
+
+[Nodejitsu][6] is used as an cloud application platform. The excellent
+[getting started][7] tutorial informs you how to use the `jitsu`
+command to deploy the application.
+
+At the moment the application used the developer sandbox. This may
+change in the future.
+
 License
 -------
 
@@ -41,3 +51,5 @@ Electus is licensed under the [MIT License][5].
 [3]: https://github.com/remy/nodemon "Nodemon on GitHub"
 [4]: http://socket.io/ "Socket.io homepage"
 [5]: https://github.com/dvberkel/electus/blob/master/LICENSE-MIT
+[6]: http://nodejitsu.com/
+[7]: http://nodejitsu.com/paas/getting-started.html
