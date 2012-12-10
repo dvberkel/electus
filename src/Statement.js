@@ -18,7 +18,7 @@
         },
 
         refresh: function(){
-            this.set({"agreement": undefined}, {silent:true});
+            this.set({"agreement": undefined}, {silent:false});
         },
 
         agree : function(){
@@ -66,14 +66,18 @@
             button.click(function(){
                 self.model.agree();
             });
-            button.appendTo(self.$el);
         },
 
         button : function(){
             if (this._button === undefined) {
                 this._button = $("<button class='agree btn btn-large btn-success'>agree</button>");
+                this._button.appendTo(this.$el);
+
+                if (this.model.get("agreement") !== undefined) {
+                    this._button.hide();
+                }
             }
-           return this._button;
+            return this._button;
         }
     });
 
@@ -95,14 +99,18 @@
             button.click(function(){
                 self.model.disagree();
             });
-            button.appendTo(self.$el);
         },
 
         button : function(){
             if (this._button === undefined) {
                 this._button = $("<button class='disagree btn btn-large btn-danger'>disagree</button>");
+                this._button.appendTo(this.$el);
+
+                if (this.model.get("agreement") !== undefined) {
+                    this._button.hide();
+                }
             }
-           return this._button;
+            return this._button;
         }
     });
 

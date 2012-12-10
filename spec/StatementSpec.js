@@ -130,7 +130,7 @@ describe("a Statement", function(){
             spyOn(callback, "method");
             statement.set("after-agreement", [callback.method]);
             statement.setSentence("it is better to ask forgiveness then permission");
-            expect(callback.method).not.toHaveBeenCalled();
+            expect(callback.method).toHaveBeenCalled();
         });
     });
 });

@@ -60,7 +60,8 @@ module.exports = function(grunt) {
 	beforeEach: false,
 	loadFixtures: false,
 	$: false,
-	console: false
+	console: false,
+	spyOn: false
       }
     },
     uglify: {}
