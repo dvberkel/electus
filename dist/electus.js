@@ -1,4 +1,4 @@
-/*! electus - v0.0.0-2 - 2012-12-10
+/*! electus - v0.0.0-2 - 2012-12-12
 * https://github.com/dvberkel/electus
 * Copyright (c) 2012 Daan van Berkel; Licensed MIT */
 
@@ -165,21 +165,6 @@
             if (! this.has("sentence")) {
                 this.set("sentence", new Electus.Sentence({ text : "You should come prepared" }));
             }
-            if (! this.has("after-agreement")) {
-                this.set("after-agreement", []);
-            }
-            this.on("change:agreement", function(){
-                _.each(this.get("after-agreement"), function(callback){
-                    callback.call(this);
-                });
-            }, this);
-            this.get("sentence").on("change:text", function(){
-                this.refresh();
-            }, this);
-        },
-
-        refresh: function(){
-            this.set({"agreement": undefined}, {silent:false});
         },
 
         agree : function(){
@@ -192,6 +177,7 @@
 
         setSentence : function(text){
             this.get("sentence").set("text", text);
+            this.set("agreement", undefined, {silent:false});
         }
     });
 

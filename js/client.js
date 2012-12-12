@@ -5,10 +5,11 @@
     });
 
     var statement = new Electus.Statement({
-        "agreement" : true,
-        "after-agreement": [function(){
-            socket.emit("agreement", statement.toJSON());
-        }]
+        "agreement" : true
+    });
+
+    statement.on("change:agreement", function(){
+	socket.emit("agreement", statement.toJSON());
     });
 
     $(function(){
