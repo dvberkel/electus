@@ -27,18 +27,6 @@ describe("a Statement", function(){
         expect(statement.get("agreement")).toBeFalsy();
     });
 
-    it("should allow agreement callbacks", function(){
-        var called = false;
-        var statement = new Electus.Statement({
-            "after-agreement": [function(){ called = true; }]
-        });
-
-        statement.agree();
-
-        expect(called).toBeTruthy();
-    });
-
-
     it("when the sentence is set the statement is refreshed", function(){
         var statement = new Electus.Statement();
         statement.agree();
@@ -130,7 +118,7 @@ describe("a Statement", function(){
             spyOn(callback, "method");
             statement.set("after-agreement", [callback.method]);
             statement.setSentence("it is better to ask forgiveness then permission");
-            expect(callback.method).toHaveBeenCalled();
+            expect(callback.method).not.toHaveBeenCalled();
         });
     });
 });
