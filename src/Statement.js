@@ -4,6 +4,9 @@
             if (! this.has("sentence")) {
                 this.set("sentence", new Electus.Sentence({ text : "You should come prepared" }));
             }
+            this.get("sentence").on("change:text", function(){
+                this.trigger("change:sentence");
+            }, this);
         },
 
         agree : function(){
@@ -16,7 +19,7 @@
 
         setSentence : function(text){
             this.get("sentence").set("text", text);
-            this.set("agreement", undefined, {silent:false});
+            this.set("agreement", undefined, {silent:true});
         }
     });
 
@@ -36,12 +39,11 @@
 
     var AgreeButton = Backbone.View.extend({
         initialize : function(){
+            this.model.on("change:sentence", function(){
+                $("button.agree, button.disagree").show();
+            });
             this.model.on("change:agreement", function(){
-                if (this.model.get("agreement") === undefined) {
-                    $("button.agree, button.disagree").show();
-                } else {
-                    $("button.agree, button.disagree").hide();
-                }
+                $("button.agree, button.disagree").hide();
             }, this);
             this.render();
         },
@@ -69,12 +71,11 @@
 
     var DisagreeButton = Backbone.View.extend({
         initialize : function(){
+            this.model.on("change:sentence", function(){
+                $("button.agree, button.disagree").show();
+            });
             this.model.on("change:agreement", function(){
-                if (this.model.get("agreement") === undefined) {
-                    $("button.agree, button.disagree").show();
-                } else {
-                    $("button.agree, button.disagree").hide();
-                }
+                $("button.agree, button.disagree").hide();
             }, this);
             this.render();
         },
