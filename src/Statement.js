@@ -40,10 +40,10 @@
     var AgreeButton = Backbone.View.extend({
         initialize : function(){
             this.model.on("change:sentence", function(){
-                $("button.agree, button.disagree").show();
-            });
+                this.button().show();
+            }, this);
             this.model.on("change:agreement", function(){
-                $("button.agree, button.disagree").hide();
+                this.button().hide();
             }, this);
             this.render();
         },
@@ -72,10 +72,10 @@
     var DisagreeButton = Backbone.View.extend({
         initialize : function(){
             this.model.on("change:sentence", function(){
-                $("button.agree, button.disagree").show();
-            });
+                this.button().show();
+            }, this);
             this.model.on("change:agreement", function(){
-                $("button.agree, button.disagree").hide();
+                this.button().hide();
             }, this);
             this.render();
         },
