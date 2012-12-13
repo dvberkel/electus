@@ -1,4 +1,4 @@
-/*! electus - v0.0.0-2 - 2012-12-12
+/*! electus - v0.0.0-2 - 2012-12-13
 * https://github.com/dvberkel/electus
 * Copyright (c) 2012 Daan van Berkel; Licensed MIT */
 
@@ -198,8 +198,13 @@
         }
     });
 
-    var AgreeButton = Backbone.View.extend({
+    var Button = Backbone.View.extend({
+        _template : _.template("<button class='<%= name %> btn btn-large <%= css_class %>'><%= name %></button>"),
+
         initialize : function(){
+            if (! this.options.onClick) {
+                this.options.onClick = function(){ return function(){}; };
+            }
             this.model.on("change:sentence", function(){
                 this.button().show();
             }, this);
@@ -210,16 +215,13 @@
         },
 
         render : function(){
-            var self = this;
             var button = this.button();
-            button.click(function(){
-                self.model.agree();
-            });
+            button.click(this.options.onClick(this.model));
         },
 
         button : function(){
             if (this._button === undefined) {
-                this._button = $("<button class='agree btn btn-large btn-success'>agree</button>");
+                this._button = $(this._template(this.options));
                 this._button.appendTo(this.$el);
 
                 if (this.model.get("agreement") !== undefined) {
@@ -230,35 +232,27 @@
         }
     });
 
-    var DisagreeButton = Backbone.View.extend({
+    var AgreeButton = Button.extend({
         initialize : function(){
-            this.model.on("change:sentence", function(){
-                this.button().show();
-            }, this);
-            this.model.on("change:agreement", function(){
-                this.button().hide();
-            }, this);
-            this.render();
-        },
+            this.options.name = "agree";
+            this.options.css_class = "btn-success";
+            this.options.onClick = function(statement){
+                return function(){ statement.agree(); };
+            };
+            
+            Button.prototype.initialize.call(this);
+        }
+    });
 
-        render : function(){
-            var self = this;
-            var button = this.button();
-            button.click(function(){
-                self.model.disagree();
-            });
-        },
-
-        button : function(){
-            if (this._button === undefined) {
-                this._button = $("<button class='disagree btn btn-large btn-danger'>disagree</button>");
-                this._button.appendTo(this.$el);
-
-                if (this.model.get("agreement") !== undefined) {
-                    this._button.hide();
-                }
-            }
-            return this._button;
+    var DisagreeButton = Button.extend({
+        initialize : function(){
+            this.options.name = "disagree";
+            this.options.css_class = "btn-danger";
+            this.options.onClick = function(statement){
+                return function(){ statement.disagree(); };
+            };
+            
+            Button.prototype.initialize.call(this);
         }
     });
 
