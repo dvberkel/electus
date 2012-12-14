@@ -74,4 +74,5 @@ Electus is licensed under the [MIT License][5].
 [6]: http://nodejitsu.com/ "nodejitsu homepage"
 [7]: http://nodejitsu.com/paas/getting-started.html "Getting started with nodejitsu"
 [8]: http://phantomjs.or/ "PhantomJS homepage"
-[9]: "Instructions how to acquire PhantomJS"
+[9]: http://phantomjs.org/download.html "Instructions how to acquire PhantomJS"
+[10]: http://pivotal.github.com/jasmine/ "Jasmine homepage"
