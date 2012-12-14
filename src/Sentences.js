@@ -1,50 +1,29 @@
 (function($, _, Backbone, Electus){
     var Sentence = Backbone.Model.extend({
-	defaults: {
+        defaults: {
           text : "Empty sentence"
         },
 
-        initialize: function() {
-          if (!this.has("after-send")) {
-            this.set("after-send", []);
-          }
-        },
-
         send: function() {
-          var self = this;
-          _.each(this.get("after-send"), function(callback) {
-            callback.call(self);
-          });
+          this.trigger("send", this);
         }
     });
-	
+        
     var Sentences = Backbone.Collection.extend({
-	model: Sentence,
-        initialize: function (options) {
-          options = options || {};
-          if (!options["after-send"]) {
-            this["after-send"] = [];
-          } else {
-            this["after-send"] = options["after-send"];
-          }
-        },
+        model: Sentence,
 
-	addAll: function(sentences) {
+        addAll: function(sentences) {
           this.reset();
           var splitSentences = sentences.split(";");
           var self = this;
           _.each(splitSentences, function(text) {
-            var sentence = new Sentence({text: text, "after-send" : [function() { 
-              self.send(this);
-            }]});
+            var sentence = new Sentence({text: text});
             this.add(sentence);
           }, this);
         },
 
        send: function(sentence) {
-         _.each(this["after-send"], function(callback) {
-            callback.call(sentence);
-          });
+          sentence.send();
        }
     });
 
