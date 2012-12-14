@@ -1,30 +1,30 @@
 (function($, _, Backbone, Electus){
     var Sentence = Backbone.Model.extend({
         defaults: {
-          text : "Empty sentence"
+            text : "Empty sentence"
         },
 
         send: function() {
-          this.trigger("send", this);
+            this.trigger("send", this);
         }
     });
-        
+    
     var Sentences = Backbone.Collection.extend({
         model: Sentence,
 
         addAll: function(sentences) {
-          this.reset();
-          var splitSentences = sentences.split(";");
-          var self = this;
-          _.each(splitSentences, function(text) {
-            var sentence = new Sentence({text: text});
-            this.add(sentence);
-          }, this);
+            this.reset();
+            var splitSentences = sentences.split(";");
+            var self = this;
+            _.each(splitSentences, function(text) {
+		var sentence = new Sentence({text: text});
+		this.add(sentence);
+            }, this);
         },
 
-       send: function(sentence) {
-          sentence.send();
-       }
+	send: function(sentence) {
+            sentence.send();
+	}
     });
 
     var SentenceView = Backbone.View.extend({
@@ -50,18 +50,18 @@
     var SentencesView = Backbone.View.extend({
 
         initialize : function() {
-          this.model.on("add", this.render, this);
-          this.render();
+            this.model.on("add", this.render, this);
+            this.render();
         },
- 
+	
         render : function(){
-          this.$el.empty();
-          var table = $('<table class="sentences table table-striped table-bordered table-condensed"></table>');
-          this.model.each(function(sentence) {
-            new SentenceWithButtonView({model: sentence, el: table});
-          });
-          table.appendTo(this.$el);
-          new UploadSentencesView({model: this.model, el: this.$el});
+            this.$el.empty();
+            var table = $('<table class="sentences table table-striped table-bordered table-condensed"></table>');
+            this.model.each(function(sentence) {
+		new SentenceWithButtonView({model: sentence, el: table});
+            });
+            table.appendTo(this.$el);
+            new UploadSentencesView({model: this.model, el: this.$el});
         }
     });
 
@@ -101,7 +101,7 @@
             if (this._button === undefined) {
                 this._button = $("<button class='send btn btn-success'>send</button>");
             }
-           return this._button;
+            return this._button;
         }
     });
 
@@ -117,7 +117,7 @@
             textarea.appendTo(this.$el);
             var button = $("<button class='upload btn btn-success'>upload</button>");
             button.click(function() {
-             self.model.addAll(textarea.val());
+		self.model.addAll(textarea.val());
             });
             button.appendTo(this.$el);
         }
