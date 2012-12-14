@@ -8,7 +8,8 @@ Setup
 
 Electus is setup as a [node module][1] and uses [grunt][2] to automate
 various tasks. Run the following command to install all the
-dependencies
+dependencies, except [PhantomJS][8]. Go to the [PhantomJS download
+section][9] for instructions how to setup PhantomJS.
 
     npm install
 
@@ -31,6 +32,25 @@ It can be used in the following manner
 
 This will start a [socket.io][4] server listening on port `3435`.
 
+### Running test
+
+We use [jasmine][10] to test our application. Open the
+'SpecRunner.html' in a browser to see the test results.
+
+You could also run
+
+    ./node_modules/.bin/grunt jasmine
+
+to have the tests automatically run. This depends on [PhantomJS][8] to
+be available on the path. Furthermore is generates a
+'_SpecRunner.html' which should not be confused for the
+`SpecRunner.html` for the browser.
+
+When adding new specifications they should be included in two places
+
+1. SpecRunner.html
+2. spec/template/_SpecRunner.html
+
 Deployement
 -----------
 
@@ -51,5 +71,7 @@ Electus is licensed under the [MIT License][5].
 [3]: https://github.com/remy/nodemon "Nodemon on GitHub"
 [4]: http://socket.io/ "Socket.io homepage"
 [5]: https://github.com/dvberkel/electus/blob/master/LICENSE-MIT
-[6]: http://nodejitsu.com/
-[7]: http://nodejitsu.com/paas/getting-started.html
+[6]: http://nodejitsu.com/ "nodejitsu homepage"
+[7]: http://nodejitsu.com/paas/getting-started.html "Getting started with nodejitsu"
+[8]: http://phantomjs.or/ "PhantomJS homepage"
+[9]: "Instructions how to acquire PhantomJS"

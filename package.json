@@ -26,7 +26,7 @@
   "npm": ">=1.1.64"
  },
  "scripts": {
-  "test": "./node_modules/.bin/grunt test",
+  "test": "./node_modules/.bin/grunt jasmine",
   "start": "node app.js"
  },
  "dependencies": {
@@ -34,6 +34,7 @@
  },
  "devDependencies": {
   "grunt": "~0.3.17",
+  "grunt-jasmine-runner": "0.6.0",
   "nodemon": "0.6.23"
  },
  "keywords": [

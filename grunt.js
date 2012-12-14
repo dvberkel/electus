@@ -1,5 +1,6 @@
 /*global module:false*/
 module.exports = function(grunt) {
+  grunt.loadNpmTasks('grunt-jasmine-runner');
 
   // Project configuration.
   grunt.initConfig({
@@ -14,8 +15,16 @@ module.exports = function(grunt) {
     lint: {
       files: ['grunt.js', 'src/**/*.js', 'spec/**/*.js']
     },
-    qunit: {
-      files: ['test/**/*.html']
+    jasmine: {
+      src: [/* defined in the template */],
+      specs: [/* defined in the template */],
+      timeout: 10000,
+      template: {
+        src: "spec/template/_SpecRunner.tmpl"
+      },
+      junit: {
+        output: "test-results"
+      }
     },
     concat: {
       dist: {
@@ -68,6 +77,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint qunit concat min');
+  grunt.registerTask('default', 'lint concat min');
 
 };
