@@ -1,4 +1,4 @@
-Electus
+Electus [![Build Status](https://travis-ci.org/dvberkel/electus.png?branch=master)](https://travis-ci.org/dvberkel/electus)
 =======
 
 Electus allows you to agree/disagree with a statement in real time.
